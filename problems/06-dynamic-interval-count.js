@@ -25,8 +25,29 @@ console.log(timeoutObject); // Timeout { ... }
 ***********************************************************************/
 
 function dynamicIntervalCount(cb, delay, amount) {
-  // Your code here
+  if (amount === undefined) {
+    return setInterval(cb, delay)
+  }
+  let intObj = setInterval(function () {
+    cb()
+    amount--
+    if (amount === 0) {
+      clearInterval(intObj)
+    }
+  }, delay)
+  return intObj
 }
+
+// dynamicIntervalCount(function () {
+//   console.log('hi');
+// }, 500, 3); // prints 'hi' at 500ms intervals a total of 3 times
+
+
+// const timeoutObject = dynamicIntervalCount(function () {
+//   console.log('hi');
+// }, 500); // prints 'hi' at 500ms intervals indefinitely
+
+// console.log(timeoutObject); // Timeout { ... }
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 try {
